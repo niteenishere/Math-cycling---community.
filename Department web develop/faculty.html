@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty - School of Mathematical Sciences | North Maharashtra University</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active-link::after {
+            width: 100%;
+        }
+        .faculty-card {
+            transition: all 0.3s ease;
+        }
+        .faculty-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .faculty-image {
+            transition: all 0.3s ease;
+            filter: grayscale(20%);
+        }
+        .faculty-card:hover .faculty-image {
+            filter: grayscale(0%);
+        }
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+        .filter-button {
+            transition: all 0.3s ease;
+        }
+        .filter-button.active {
+            background-color: #1e40af;
+            color: white;
+        }
+        .department-tab {
+            transition: all 0.3s ease;
+        }
+        .department-tab.active {
+            background-color: #1e40af;
+            color: white;
+        }
+        .faculty-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        .modal-content {
+            animation: modalFadeIn 0.4s ease;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.871 4A17.926 17.926 0 003 12c0 2.874.673 5.59 1.871 8m14.13 0a17.926 17.926 0 001.87-8c0-2.874-.673-5.59-1.87-8M9 9h1.246a1 1 0 01.961.725l1.586 5.55a1 1 0 00.961.725H15m1-7h-.08a2 2 0 00-1.519.698L9.6 15.302A2 2 0 018.08 16H8" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold">School of Mathematical Sciences</h1>
+                            <p class="text-sm text-blue-200">North Maharashtra University</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center">
+                        <a href="index.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Home</a>
+                        <a href="about.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">About</a>
+                        <a href="programs.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Programs</a>
+                        <a href="faculty.html" class="nav-link active-link px-4 py-2 hover:text-blue-300 transition">Faculty</a>
+                        <a href="alumni.html" class="nav-link px-4 py-2 hover:text-blue-300 transition" data-page="alumni">Alumni</a>
+                        <a href="contact.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-32 pb-20 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Faculty</h1>
+                <p class="text-xl text-blue-200 mb-8">Meet our distinguished team of mathematicians and educators dedicated to excellence in teaching and research</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Department Tabs -->
+    <section class="py-8 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button class="department-tab active px-6 py-3 rounded-full bg-blue-600 text-white font-medium" data-department="all">All Faculty</button>
+                <button class="department-tab px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium" data-department="pure">Pure Mathematics</button>
+                <button class="department-tab px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium" data-department="applied">Applied Mathematics</button>
+                <button class="department-tab px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium" data-department="statistics">Statistics</button>
+                <button class="department-tab px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium" data-department="computational">Computational Mathematics</button>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-button px-4 py-2 rounded-md bg-gray-200 text-gray-700 font-medium" data-filter="all">All</button>
+                <button class="filter-button px-4 py-2 rounded-md bg-gray-200 text-gray-700 font-medium" data-filter="professor">Professors</button>
+                <button class="filter-button px-4 py-2 rounded-md bg-gray-200 text-gray-700 font-medium" data-filter="associate">Associate Professors</button>
+                <button class="filter-button px-4 py-2 rounded-md bg-gray-200 text-gray-700 font-medium" data-filter="assistant">Assistant Professors</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Directory -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Faculty Member 1 -->
+                <div class="faculty-card bg-white rounded-xl overflow-hidden shadow-md" data-department="pure" data-position="professor">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="faculty-image w-full h-full bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-blue-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Professor & Head
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. R.L. Shinde</h3>
+                        <p class="text-blue-600 font-medium mb-3">Pure Mathematics</p>
+                        <p class="text-gray-600 text-sm mb-4">Ph.D. in Mathematics with expertise in Differential Equations and Mathematical Analysis.</p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>Differential Equations, Mathematical Analysis</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="mailto:rl.shinde@nmu.ac.in" class="social-icon text-gray-400 hover:text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=RL_Shinde" target="_blank" class="social-icon text-gray-400 hover:text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.researchgate.net/profile/RL-Shinde" target="_blank" class="social-icon text-gray-400 hover:text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.586 0c-2.123 0-3.83 1.707-3.83 3.83 0 2.122 1.707 3.83 3.83 3.83 2.122 0 3.83-1.708 3.83-3.83s-1.708-3.83-3.83-3.83zm-3.83 18.268h3.83v-13.268h-3.83v13.268zm-11.238-13.268c-2.122 0-3.83 1.708-3.83 3.83v9.438h3.83v-9.438h3.83v9.438h3.83v-13.268h-7.66z"/>
+                                </svg>
+                            </a>
+                            <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" class="social-icon text-gray-400 hover:text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.808v-10.964h2.808v10.964zm-1.404-12.473c-.935 0-1.691-.756-1.691-1.691s.756-1.691 1.691-1.691 1.691.756 1.691 1.691-.756 1.691-1.691 1.691zm13.545 12.473h-2.808v-5.66c0-1.308-.027-2.993-1.823-2.993-1.823 0-2.102 1.425-2.102 2.898v5.755h-2.808v-10.964h2.695v1.233h.038c.467-.885 1.607-1.823 3.307-1.823 3.539 0 4.19 2.328 4.19 5.358v6.196z"/>
+                                </svg>
+                            </a>
+                            <button class="view-profile ml-auto text-blue-600 hover:text-blue-800 text-sm font-medium" data-faculty="rl-shinde">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Member 2 -->
+                <div class="faculty-card bg-white rounded-xl overflow-hidden shadow-md" data-department="applied" data-position="professor">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="faculty-image w-full h-full bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-indigo-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Professor
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Kirtee Kamlaja</h3>
+                        <p class="text-indigo-600 font-medium mb-3">Applied Mathematics</p>
+                        <p class="text-gray-600 text-sm mb-4">Ph.D. with specialization in Mathematical Modeling and Numerical Analysis.</p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>Mathematical Modeling, Numerical Methods</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="mailto:kirtee.kamlaja@nmu.ac.in" class="social-icon text-gray-400 hover:text-indigo-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=Kirtee_Kamlaja" target="_blank" class="social-icon text-gray-400 hover:text-indigo-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.researchgate.net/profile/Kirtee-Kamlaja" target="_blank" class="social-icon text-gray-400 hover:text-indigo-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.586 0c-2.123 0-3.83 1.707-3.83 3.83 0 2.122 1.707 3.83 3.83 3.83 2.122 0 3.83-1.708 3.83-3.83s-1.708-3.83-3.83-3.83zm-3.83 18.268h3.83v-13.268h-3.83v13.268zm-11.238-13.268c-2.122 0-3.83 1.708-3.83 3.83v9.438h3.83v-9.438h3.83v9.438h3.83v-13.268h-7.66z"/>
+                                </svg>
+                            </a>
+                            <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" class="social-icon text-gray-400 hover:text-indigo-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.808v-10.964h2.808v10.964zm-1.404-12.473c-.935 0-1.691-.756-1.691-1.691s.756-1.691 1.691-1.691 1.691.756 1.691 1.691-.756 1.691-1.691 1.691zm13.545 12.473h-2.808v-5.66c0-1.308-.027-2.993-1.823-2.993-1.823 0-2.102 1.425-2.102 2.898v5.755h-2.808v-10.964h2.695v1.233h.038c.467-.885 1.607-1.823 3.307-1.823 3.539 0 4.19 2.328 4.19 5.358v6.196z"/>
+                                </svg>
+                            </a>
+                            <button class="view-profile ml-auto text-indigo-600 hover:text-indigo-800 text-sm font-medium" data-faculty="kirtee-kamlaja">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Member 3 -->
+                <div class="faculty-card bg-white rounded-xl overflow-hidden shadow-md" data-department="computational" data-position="associate">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="faculty-image w-full h-full bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-green-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-green-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Associate Professor
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Dr. Rohan Koshti</h3>
+                        <p class="text-green-600 font-medium mb-3">Computational Mathematics</p>
+                        <p class="text-gray-600 text-sm mb-4">Ph.D. with focus on Computational Fluid Dynamics and Scientific Computing.</p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>Computational Fluid Dynamics, Scientific Computing</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="mailto:rohan.koshti@nmu.ac.in" class="social-icon text-gray-400 hover:text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=Rohan_Koshti" target="_blank" class="social-icon text-gray-400 hover:text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.researchgate.net/profile/Rohan-Koshti" target="_blank" class="social-icon text-gray-400 hover:text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.586 0c-2.123 0-3.83 1.707-3.83 3.83 0 2.122 1.707 3.83 3.83 3.83 2.122 0 3.83-1.708 3.83-3.83s-1.708-3.83-3.83-3.83zm-3.83 18.268h3.83v-13.268h-3.83v13.268zm-11.238-13.268c-2.122 0-3.83 1.708-3.83 3.83v9.438h3.83v-9.438h3.83v9.438h3.83v-13.268h-7.66z"/>
+                                </svg>
+                            </a>
+                            <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" class="social-icon text-gray-400 hover:text-green-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.808v-10.964h2.808v10.964zm-1.404-12.473c-.935 0-1.691-.756-1.691-1.691s.756-1.691 1.691-1.691 1.691.756 1.691 1.691-.756 1.691-1.691 1.691zm13.545 12.473h-2.808v-5.66c0-1.308-.027-2.993-1.823-2.993-1.823 0-2.102 1.425-2.102 2.898v5.755h-2.808v-10.964h2.695v1.233h.038c.467-.885 1.607-1.823 3.307-1.823 3.539 0 4.19 2.328 4.19 5.358v6.196z"/>
+                                </svg>
+                            </a>
+                            <button class="view-profile ml-auto text-green-600 hover:text-green-800 text-sm font-medium" data-faculty="rohan-koshti">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Faculty Member 4 -->
+                <div class="faculty-card bg-white rounded-xl overflow-hidden shadow-md" data-department="statistics" data-position="assistant">
+                    <div class="relative h-64 overflow-hidden">
+                        <div class="faculty-image w-full h-full bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-purple-300" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Assistant Professor
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-1">Asst. Prof. Manoj Patil</h3>
+                        <p class="text-purple-600 font-medium mb-3">Statistics</p>
+                        <p class="text-gray-600 text-sm mb-4">Specializing in Statistical Analysis and Data Science with expertise in applied statistics.</p>
+                        <div class="flex items-center text-gray-500 text-sm mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span>Statistical Analysis, Data Science</span>
+                        </div>
+                        <div class="flex space-x-3">
+                            <a href="mailto:manoj.patil@nmu.ac.in" class="social-icon text-gray-400 hover:text-purple-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </a>
+                            <a href="https://scholar.google.com/citations?user=Manoj_Patil" target="_blank" class="social-icon text-gray-400 hover:text-purple-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.researchgate.net/profile/Manoj-Patil-15" target="_blank" class="social-icon text-gray-400 hover:text-purple-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.586 0c-2.123 0-3.83 1.707-3.83 3.83 0 2.122 1.707 3.83 3.83 3.83 2.122 0 3.83-1.708 3.83-3.83s-1.708-3.83-3.83-3.83zm-3.83 18.268h3.83v-13.268h-3.83v13.268zm-11.238-13.268c-2.122 0-3.83 1.708-3.83 3.83v9.438h3.83v-9.438h3.83v9.438h3.83v-13.268h-7.66z"/>
+                                </svg>
+                            </a>
+                            <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" class="social-icon text-gray-400 hover:text-purple-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.808v-10.964h2.808v10.964zm-1.404-12.473c-.935 0-1.691-.756-1.691-1.691s.756-1.691 1.691-1.691 1.691.756 1.691 1.691-.756 1.691-1.691 1.691zm13.545 12.473h-2.808v-5.66c0-1.308-.027-2.993-1.823-2.993-1.823 0-2.102 1.425-2.102 2.898v5.755h-2.808v-10.964h2.695v1.233h.038c.467-.885 1.607-1.823 3.307-1.823 3.539 0 4.19 2.328 4.19 5.358v6.196z"/>
+                                </svg>
+                            </a>
+                            <button class="view-profile ml-auto text-purple-600 hover:text-purple-800 text-sm font-medium" data-faculty="manoj-patil">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Faculty Stats -->
+    <section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Faculty Statistics</h2>
+                <p class="text-xl text-blue-200 max-w-3xl mx-auto">Our department boasts a diverse and accomplished team of mathematicians and educators</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">4+</div>
+                    <div class="text-xl text-blue-200">Faculty Members</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">75%</div>
+                    <div class="text-xl text-blue-200">Ph.D. Holders</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">50+</div>
+                    <div class="text-xl text-blue-200">Research Publications</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-5xl font-bold mb-2">20+</div>
+                    <div class="text-xl text-blue-200">Years of Excellence</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Highlights -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">Research Highlights</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Our faculty members are engaged in cutting-edge research across various mathematical disciplines</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Differential Equations</h3>
+                    <p class="text-gray-600">Research on partial differential equations and their applications in mathematical physics and engineering problems.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Computational Fluid Dynamics</h3>
+                    <p class="text-gray-600">Numerical simulation and analysis of fluid flow problems using advanced computational techniques.</p>
+                </div>
+                
+                <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+                    <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Statistical Analysis</h3>
+                    <p class="text-gray-600">Advanced statistical methods for data analysis and their applications in various scientific fields.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Our Team -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-gradient-to-br from-blue-600 to-indigo-700 p-10 text-white flex items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold mb-4">Join Our Team</h2>
+                            <p class="mb-6">We're always looking for talented mathematicians and educators to join our faculty. Explore current opportunities and be part of our academic community.</p>
+                            <div class="flex space-x-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 p-10">
+                        <h3 class="text-2xl font-bold mb-4">Current Openings</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-bold">Assistant Professor</h4>
+                                    <p class="text-gray-600 text-sm">Specialization in Pure Mathematics</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500 mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <div>
+                                    <h4 class="font-bold">Research Associate</h4>
+                                    <p class="text-gray-600 text-sm">For funded project in Computational Mathematics</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <a href="#" class="mt-6 inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition">View All Positions</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">School of Mathematical Sciences</h3>
+                    <p class="text-gray-400">North Maharashtra University<br>Jalgaon, Maharashtra<br>India - 425001</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                        +91 257 2258428
+                    </p>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        mathematics@nmu.ac.in
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Programs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Research</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Publications</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2023 School of Mathematical Sciences, North Maharashtra University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Faculty Profile Modal -->
+    <div id="facultyModal" class="faculty-modal">
+        <div class="min-h-screen py-10 px-4 flex items-center justify-center">
+            <div class="modal-content bg-white w-full max-w-4xl rounded-xl shadow-2xl overflow-hidden relative">
+                <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div class="md:flex">
+                    <div class="md:w-1/3 bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white">
+                        <div class="w-32 h-32 mx-auto bg-white rounded-full flex items-center justify-center mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <h2 id="modalName" class="text-2xl font-bold mb-2 text-center">Faculty Name</h2>
+                        <p id="modalPosition" class="text-blue-200 text-center mb-6">Position</p>
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span id="modalEmail">email@nmu.ac.in</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                <span id="modalPhone">+91 257 2258428</span>
+                            </div>
+                            <div class="flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <span id="modalDepartment">Department</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 flex justify-center space-x-4">
+                            <a href="#" class="text-white hover:text-blue-200 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-white hover:text-blue-200 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19.586 0c-2.123 0-3.83 1.707-3.83 3.83 0 2.122 1.707 3.83 3.83 3.83 2.122 0 3.83-1.708 3.83-3.83s-1.708-3.83-3.83-3.83zm-3.83 18.268h3.83v-13.268h-3.83v13.268zm-11.238-13.268c-2.122 0-3.83 1.708-3.83 3.83v9.438h3.83v-9.438h3.83v9.438h3.83v-13.268h-7.66z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="text-white hover:text-blue-200 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01h-2.808v-10.964h2.808v10.964zm-1.404-12.473c-.935 0-1.691-.756-1.691-1.691s.756-1.691 1.691-1.691 1.691.756 1.691 1.691-.756 1.691-1.691 1.691zm13.545 12.473h-2.808v-5.66c0-1.308-.027-2.993-1.823-2.993-1.823 0-2.102 1.425-2.102 2.898v5.755h-2.808v-10.964h2.695v1.233h.038c.467-.885 1.607-1.823 3.307-1.823 3.539 0 4.19 2.328 4.19 5.358v6.196z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 p-8">
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3">Biography</h3>
+                            <p id="modalBio" class="text-gray-600">Faculty biography will appear here.</p>
+                        </div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3">Education</h3>
+                            <ul id="modalEducation" class="list-disc pl-5 text-gray-600 space-y-1">
+                                <li>Ph.D. in Mathematics, University</li>
+                                <li>M.Sc. in Mathematics, University</li>
+                                <li>B.Sc. in Mathematics, University</li>
+                            </ul>
+                        </div>
+                        <div class="mb-6">
+                            <h3 class="text-xl font-bold mb-3">Research Interests</h3>
+                            <ul id="modalResearch" class="list-disc pl-5 text-gray-600 space-y-1">
+                                <li>Research area 1</li>
+                                <li>Research area 2</li>
+                                <li>Research area 3</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-3">Selected Publications</h3>
+                            <ul id="modalPublications" class="list-disc pl-5 text-gray-600 space-y-2">
+                                <li>Publication 1</li>
+                                <li>Publication 2</li>
+                                <li>Publication 3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-opacity-90', 'backdrop-blur-sm');
+            } else {
+                navbar.classList.remove('bg-opacity-90', 'backdrop-blur-sm');
+            }
+        });
+
+        // Department tabs functionality
+        const departmentTabs = document.querySelectorAll('.department-tab');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const facultyCards = document.querySelectorAll('.faculty-card');
+
+        departmentTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                departmentTabs.forEach(t => t.classList.remove('active', 'bg-blue-600', 'text-white'));
+                t.classList.add('bg-gray-200', 'text-gray-700');
+                
+                // Add active class to clicked tab
+                tab.classList.add('active', 'bg-blue-600', 'text-white');
+                tab.classList.remove('bg-gray-200', 'text-gray-700');
+                
+                const department = tab.getAttribute('data-department');
+                
+                // Filter faculty cards
+                facultyCards.forEach(card => {
+                    if (department === 'all' || card.getAttribute('data-department') === department) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active', 'bg-blue-600', 'text-white'));
+                
+                // Add active class to clicked button
+                button.classList.add('active', 'bg-blue-600', 'text-white');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                // Filter faculty cards
+                facultyCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-position') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Faculty profile modal functionality
+        const modal = document.getElementById('facultyModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const viewProfileBtns = document.querySelectorAll('.view-profile');
+
+        // Faculty data
+        const facultyData = {
+            'rl-shinde': {
+                name: 'Dr. R.L. Shinde',
+                position: 'Professor & Head',
+                department: 'Pure Mathematics',
+                email: 'rl.shinde@nmu.ac.in',
+                phone: '+91 257 2258428',
+                bio: 'Dr. R.L. Shinde is a Professor and Head of the School of Mathematical Sciences at North Maharashtra University. With over 20 years of teaching and research experience, he has made significant contributions to the field of Differential Equations and Mathematical Analysis.',
+                education: [
+                    'Ph.D. in Mathematics, North Maharashtra University',
+                    'M.Sc. in Mathematics, University of Pune',
+                    'B.Sc. in Mathematics, University of Pune'
+                ],
+                research: [
+                    'Differential Equations',
+                    'Mathematical Analysis',
+                    'Numerical Methods'
+                ],
+                publications: [
+                    'Shinde, R.L. et al. (2022). "Novel approach to solving nonlinear differential equations." Journal of Mathematical Analysis.',
+                    'Shinde, R.L. & Kumar, A. (2020). "Analytical solutions for a class of partial differential equations." Applied Mathematics and Computation.',
+                    'Shinde, R.L. (2018). "Numerical methods for boundary value problems." International Journal of Mathematics and Mathematical Sciences.'
+                ]
+            },
+            'kirtee-kamlaja': {
+                name: 'Dr. Kirtee Kamlaja',
+                position: 'Professor',
+                department: 'Applied Mathematics',
+                email: 'kirtee.kamlaja@nmu.ac.in',
+                phone: '+91 257 2258429',
+                bio: 'Dr. Kirtee Kamlaja is a Professor of Applied Mathematics at North Maharashtra University. Her research focuses on Mathematical Modeling and Numerical Analysis with applications in engineering and physical sciences.',
+                education: [
+                    'Ph.D. in Applied Mathematics, IIT Bombay',
+                    'M.Sc. in Mathematics, University of Mumbai',
+                    'B.Sc. in Mathematics, University of Mumbai'
+                ],
+                research: [
+                    'Mathematical Modeling',
+                    'Numerical Analysis',
+                    'Scientific Computing'
+                ],
+                publications: [
+                    'Kamlaja, K. & Patil, S. (2021). "Finite element analysis of heat transfer problems." Journal of Computational Mathematics.',
+                    'Kamlaja, K. (2019). "Mathematical modeling of fluid flow through porous media." Applied Mathematical Modelling.',
+                    'Kamlaja, K. et al. (2017). "Numerical solutions of nonlinear equations using iterative methods." Numerical Algorithms.'
+                ]
+            },
+            'rohan-koshti': {
+                name: 'Dr. Rohan Koshti',
+                position: 'Associate Professor',
+                department: 'Computational Mathematics',
+                email: 'rohan.koshti@nmu.ac.in',
+                phone: '+91 257 2258430',
+                bio: 'Dr. Rohan Koshti is an Associate Professor specializing in Computational Mathematics. His research interests include Computational Fluid Dynamics and Scientific Computing with applications in engineering problems.',
+                education: [
+                    'Ph.D. in Computational Mathematics, IIT Madras',
+                    'M.Tech. in Scientific Computing, IIT Delhi',
+                    'B.E. in Computer Science, University of Pune'
+                ],
+                research: [
+                    'Computational Fluid Dynamics',
+                    'Scientific Computing',
+                    'High Performance Computing'
+                ],
+                publications: [
+                    'Koshti, R. & Sharma, V. (2022). "Parallel algorithms for computational fluid dynamics." Journal of Parallel and Distributed Computing.',
+                    'Koshti, R. (2020). "GPU-accelerated solutions for fluid flow problems." Journal of Computational Physics.',
+                    'Koshti, R. et al. (2018). "Numerical simulation of turbulent flows using finite volume methods." International Journal for Numerical Methods in Fluids.'
+                ]
+            },
+            'manoj-patil': {
+                name: 'Asst. Prof. Manoj Patil',
+                position: 'Assistant Professor',
+                department: 'Statistics',
+                email: 'manoj.patil@nmu.ac.in',
+                phone: '+91 257 2258431',
+                bio: 'Asst. Prof. Manoj Patil specializes in Statistical Analysis and Data Science. His work focuses on applying statistical methods to solve real-world problems across various domains.',
+                education: [
+                    'M.Phil. in Statistics, North Maharashtra University',
+                    'M.Sc. in Statistics, University of Pune',
+                    'B.Sc. in Mathematics and Statistics, North Maharashtra University'
+                ],
+                research: [
+                    'Statistical Analysis',
+                    'Data Science',
+                    'Applied Statistics'
+                ],
+                publications: [
+                    'Patil, M. & Deshmukh, S. (2021). "Statistical analysis of climate data in Maharashtra region." Journal of Environmental Statistics.',
+                    'Patil, M. (2019). "Regression models for agricultural yield prediction." Indian Journal of Agricultural Statistics.',
+                    'Patil, M. et al. (2018). "Time series analysis of economic indicators." Journal of Statistical Studies.'
+                ]
+            }
+        };
+
+        viewProfileBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const facultyId = btn.getAttribute('data-faculty');
+                const faculty = facultyData[facultyId];
+                
+                // Populate modal with faculty data
+                document.getElementById('modalName').textContent = faculty.name;
+                document.getElementById('modalPosition').textContent = faculty.position;
+                document.getElementById('modalEmail').textContent = faculty.email;
+                document.getElementById('modalPhone').textContent = faculty.phone;
+                document.getElementById('modalDepartment').textContent = faculty.department;
+                document.getElementById('modalBio').textContent = faculty.bio;
+                
+                // Populate education list
+                const educationList = document.getElementById('modalEducation');
+                educationList.innerHTML = '';
+                faculty.education.forEach(edu => {
+                    const li = document.createElement('li');
+                    li.textContent = edu;
+                    educationList.appendChild(li);
+                });
+                
+                // Populate research interests list
+                const researchList = document.getElementById('modalResearch');
+                researchList.innerHTML = '';
+                faculty.research.forEach(res => {
+                    const li = document.createElement('li');
+                    li.textContent = res;
+                    researchList.appendChild(li);
+                });
+                
+                // Populate publications list
+                const pubList = document.getElementById('modalPublications');
+                pubList.innerHTML = '';
+                faculty.publications.forEach(pub => {
+                    const li = document.createElement('li');
+                    li.textContent = pub;
+                    pubList.appendChild(li);
+                });
+                
+                // Show modal
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96353b8fa1509a78',t:'MTc1MzIxMTM2OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
