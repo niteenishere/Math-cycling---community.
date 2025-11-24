@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Contents - MSc Classroom</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            min-height: 100%;
+            background: linear-gradient(to bottom, #4da6ff 0%, #80c4ff 30%, #b3d9ff 60%, #e6f2ff 100%);
+            padding: 60px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .animated-clouds {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .rising-sun {
+            position: fixed;
+            bottom: -300px;
+            right: 8%;
+            width: 350px;
+            height: 350px;
+            pointer-events: none;
+            z-index: 0;
+            animation: sunRise 6s ease-out forwards;
+        }
+
+        @keyframes sunRise {
+            0% {
+                bottom: -300px;
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 0.9;
+            }
+            100% {
+                bottom: 5%;
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .sun-core {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #FFEB3B 0%, #FFD700 30%, #FFA500 70%, #FF8C00 100%);
+            box-shadow: 0 0 80px rgba(255, 235, 59, 1),
+                        0 0 120px rgba(255, 215, 0, 0.9),
+                        0 0 180px rgba(255, 165, 0, 0.7),
+                        0 0 240px rgba(255, 140, 0, 0.5);
+            animation: sunGlow 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes sunGlow {
+            0%, 100% {
+                box-shadow: 0 0 80px rgba(255, 235, 59, 1),
+                            0 0 120px rgba(255, 215, 0, 0.9),
+                            0 0 180px rgba(255, 165, 0, 0.7),
+                            0 0 240px rgba(255, 140, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 100px rgba(255, 235, 59, 1),
+                            0 0 150px rgba(255, 215, 0, 1),
+                            0 0 220px rgba(255, 165, 0, 0.8),
+                            0 0 280px rgba(255, 140, 0, 0.6);
+            }
+        }
+
+        .sun-rays {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            margin-left: -250px;
+            margin-top: -250px;
+            animation: rotateRays 20s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotateRays {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .sun-ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(255, 235, 59, 0.8), rgba(255, 215, 0, 0.4), transparent);
+            transform-origin: center -100px;
+            filter: blur(1px);
+        }
+
+        .cloud {
+            position: absolute;
+            filter: blur(2px);
+            opacity: 0.85;
+        }
+
+        .cloud svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cloud-1 {
+            width: 300px;
+            height: 150px;
+            top: 10%;
+            left: -300px;
+            animation: driftCloud1 120s linear infinite;
+        }
+
+        .cloud-2 {
+            width: 350px;
+            height: 175px;
+            top: 25%;
+            left: -350px;
+            animation: driftCloud2 150s linear infinite;
+        }
+
+        .cloud-3 {
+            width: 280px;
+            height: 140px;
+            top: 45%;
+            left: -280px;
+            animation: driftCloud3 135s linear infinite;
+        }
+
+        .cloud-4 {
+            width: 320px;
+            height: 160px;
+            top: 60%;
+            left: -320px;
+            animation: driftCloud4 160s linear infinite;
+        }
+
+        .cloud-5 {
+            width: 290px;
+            height: 145px;
+            top: 75%;
+            left: -290px;
+            animation: driftCloud5 145s linear infinite;
+        }
+
+        @keyframes driftCloud1 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 300px)); }
+        }
+
+        @keyframes driftCloud2 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 350px)); }
+        }
+
+        @keyframes driftCloud3 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 280px)); }
+        }
+
+        @keyframes driftCloud4 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 320px)); }
+        }
+
+        @keyframes driftCloud5 {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw + 290px)); }
+        }
+
+        .content-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .page-subtitle {
+            font-size: 20px;
+            color: #f0f8ff;
+            margin: 0 0 25px 0;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .intro-section {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border-radius: 16px;
+            padding: 25px 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .intro-text {
+            color: #ffffff;
+            font-size: 17px;
+            line-height: 1.8;
+            margin: 0;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .semester-navigation {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: transparent;
+            padding: 15px 0;
+        }
+
+        .semester-btn {
+            background: linear-gradient(135deg, rgba(30, 90, 158, 0.9) 0%, rgba(44, 126, 211, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 30px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(44, 126, 211, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .semester-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .semester-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .semester-btn:hover::before {
+            left: 100%;
+        }
+
+        .semester-btn:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .semester-btn:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(44, 126, 211, 0.5), 0 0 30px rgba(44, 126, 211, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .semester-btn.active {
+            background: linear-gradient(135deg, rgba(44, 126, 211, 1) 0%, rgba(58, 158, 235, 1) 100%);
+            border-color: #ffffff;
+            box-shadow: 0 12px 35px rgba(44, 126, 211, 0.7), 0 0 40px rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .semester-number {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .semester-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subjects-container {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .subjects-container.active {
+            display: block;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .subject-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            animation: cardAppear 0.5s ease backwards;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2c7ed3, #3a9eeb, #2c7ed3);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .subject-card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .subject-card:nth-child(1) { animation-delay: 0.1s; }
+        .subject-card:nth-child(2) { animation-delay: 0.2s; }
+        .subject-card:nth-child(3) { animation-delay: 0.3s; }
+        .subject-card:nth-child(4) { animation-delay: 0.4s; }
+        .subject-card:nth-child(5) { animation-delay: 0.5s; }
+        .subject-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .subject-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(44, 126, 211, 0.4), 0 0 20px rgba(44, 126, 211, 0.2);
+            border-color: #2c7ed3;
+        }
+
+        .subject-card.research {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+            border: 2px solid #ff9933;
+        }
+
+        .subject-card.research::before {
+            background: linear-gradient(90deg, #ff9933, #ff6600, #ff9933);
+            background-size: 200% 100%;
+        }
+
+        .subject-card.research:hover {
+            border-color: #ff6600;
+            box-shadow: 0 15px 40px rgba(255, 102, 0, 0.4), 0 0 20px rgba(255, 153, 51, 0.3);
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8eef5;
+        }
+
+        .subject-icon {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #2c7ed3 0%, #1e5a9e 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 26px;
+            box-shadow: 0 4px 15px rgba(44, 126, 211, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .subject-card:hover .subject-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .subject-card.research .subject-icon {
+            background: linear-gradient(135deg, #ff9933 0%, #ff6600 100%);
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+
+        .subject-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0a192f;
+            margin: 0;
+            flex: 1;
+        }
+
+        .subject-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .action-btn {
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+        }
+
+        .action-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .study-materials-btn {
+            background: linear-gradient(135deg, #2c7ed3 0%, #1e5a9e 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(44, 126, 211, 0.3);
+        }
+
+        .study-materials-btn:hover {
+            background: linear-gradient(135deg, #3a9eeb 0%, #2c7ed3 100%);
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(44, 126, 211, 0.5);
+        }
+
+        .previous-papers-btn {
+            background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .previous-papers-btn:hover {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        }
+
+        .upload-note {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid #2c7ed3;
+            animation: cardAppear 0.5s ease 0.7s backwards;
+        }
+
+        .upload-note h3 {
+            color: #0a192f;
+            margin: 0 0 12px 0;
+            font-size: 24px;
+        }
+
+        .upload-note p {
+            color: #4a5568;
+            margin: 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: fadeIn 0.8s ease 0.4s backwards;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 50px 16px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .flying-birds-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .flying-bird {
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            opacity: 0.8;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .flying-bird svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .flying-bird.flapping .wing-left {
+            animation: flapLeftWing 0.5s ease-in-out infinite;
+            transform-origin: right center;
+        }
+
+        .flying-bird.flapping .wing-right {
+            animation: flapRightWing 0.5s ease-in-out infinite;
+            transform-origin: left center;
+        }
+
+        @keyframes flapLeftWing {
+            0%, 100% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: rotateY(-50deg);
+            }
+        }
+
+        @keyframes flapRightWing {
+            0%, 100% {
+                transform: rotateY(0deg);
+            }
+            50% {
+                transform: rotateY(50deg);
+            }
+        }
+
+        @keyframes bobFlight {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .bird-flock {
+            position: absolute;
+            animation: flockMovement linear infinite;
+        }
+
+        @keyframes flockMovement {
+            0% {
+                transform: translate(-100px, 0px);
+            }
+            100% {
+                transform: translate(calc(100vw + 100px), -200px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 36px;
+            }
+
+            .page-subtitle {
+                font-size: 18px;
+            }
+
+            .semester-navigation {
+                grid-template-columns: 1fr;
+                position: static;
+            }
+
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="animated-clouds">
+   <div class="cloud cloud-1">
+    <svg viewbox="0 0 300 150" xmlns="http://www.w3.org/2000/svg"><ellipse cx="150" cy="75" rx="90" ry="45" fill="white" opacity="0.9" /> <ellipse cx="180" cy="70" rx="75" ry="37" fill="white" opacity="0.85" /> <ellipse cx="120" cy="80" rx="70" ry="35" fill="white" opacity="0.9" /> <ellipse cx="150" cy="85" rx="60" ry="30" fill="white" opacity="0.8" />
+    </svg>
+   </div>
+   <div class="cloud cloud-2">
+    <svg viewbox="0 0 350 175" xmlns="http://www.w3.org/2000/svg"><ellipse cx="175" cy="87" rx="100" ry="50" fill="white" opacity="0.9" /> <ellipse cx="210" cy="82" rx="85" ry="42" fill="white" opacity="0.85" /> <ellipse cx="140" cy="92" rx="75" ry="37" fill="white" opacity="0.9" />
+    </svg>
+   </div>
+   <div class="cloud cloud-3">
+    <svg viewbox="0 0 280 140" xmlns="http://www.w3.org/2000/svg"><ellipse cx="140" cy="70" rx="82" ry="41" fill="white" opacity="0.9" /> <ellipse cx="165" cy="66" rx="70" ry="35" fill="white" opacity="0.85" /> <ellipse cx="115" cy="74" rx="65" ry="32" fill="white" opacity="0.9" />
+    </svg>
+   </div>
+   <div class="cloud cloud-4">
+    <svg viewbox="0 0 320 160" xmlns="http://www.w3.org/2000/svg"><ellipse cx="160" cy="80" rx="92" ry="46" fill="white" opacity="0.9" /> <ellipse cx="190" cy="75" rx="77" ry="38" fill="white" opacity="0.85" /> <ellipse cx="130" cy="85" rx="70" ry="35" fill="white" opacity="0.9" />
+    </svg>
+   </div>
+   <div class="cloud cloud-5">
+    <svg viewbox="0 0 290 145" xmlns="http://www.w3.org/2000/svg"><ellipse cx="145" cy="72" rx="82" ry="41" fill="white" opacity="0.9" /> <ellipse cx="175" cy="68" rx="72" ry="36" fill="white" opacity="0.85" /> <ellipse cx="115" cy="76" rx="65" ry="32" fill="white" opacity="0.9" />
+    </svg>
+   </div>
+  </div>
+  <div class="rising-sun">
+   <div class="sun-rays" id="sunRays"></div>
+   <div class="sun-core"></div>
+  </div>
+  <div class="flying-birds-container" id="flyingBirds"></div>
+  <div class="page-wrapper">
+   <div class="content-container">
+    <header class="page-header">
+     <h1 class="page-title" id="pageTitle">Course Contents</h1>
+     <p class="page-subtitle" id="pageSubtitle">Access your study materials and resources</p>
+     <div class="search-container"><input type="text" class="search-input" id="searchInput" placeholder="🔍 Search subjects, materials, or papers..."> <span class="search-icon">⌕</span>
+     </div>
+     <div class="intro-section" id="introSection">
+      <p class="intro-text">Welcome to your comprehensive academic resource center. This portal provides organized access to all study materials, lecture notes, and previous year question papers across all four semesters of your Master's program. Each semester contains six subjects including specialized research projects in the final two semesters. Navigate through the semester buttons below to access your learning materials.</p>
+     </div>
+    </header>
+    <nav class="semester-navigation"><button class="semester-btn" data-semester="1">
+      <div class="semester-number">
+       Semester
+      </div>
+      <div class="semester-title" id="semester1Label">
+       Semester 1
+      </div></button> <button class="semester-btn" data-semester="2">
+      <div class="semester-number">
+       Semester
+      </div>
+      <div class="semester-title" id="semester2Label">
+       Semester 2
+      </div></button> <button class="semester-btn" data-semester="3">
+      <div class="semester-number">
+       Semester
+      </div>
+      <div class="semester-title" id="semester3Label">
+       Semester 3
+      </div></button> <button class="semester-btn" data-semester="4">
+      <div class="semester-number">
+       Semester
+      </div>
+      <div class="semester-title" id="semester4Label">
+       Semester 4
+      </div></button>
+    </nav>
+    <div id="semester1Content" class="subjects-container">
+     <div class="subjects-grid" id="semester1Subjects"></div>
+     <div class="upload-note">
+      <h3>📚 Study Materials</h3>
+      <p>Materials can be uploaded from Google Drive. Links will be added to each subject button for easy access.</p>
+     </div>
+    </div>
+    <div id="semester2Content" class="subjects-container">
+     <div class="subjects-grid" id="semester2Subjects"></div>
+     <div class="upload-note">
+      <h3>📚 Study Materials</h3>
+      <p>Materials can be uploaded from Google Drive. Links will be added to each subject button for easy access.</p>
+     </div>
+    </div>
+    <div id="semester3Content" class="subjects-container">
+     <div class="subjects-grid" id="semester3Subjects"></div>
+     <div class="upload-note">
+      <h3>📚 Study Materials</h3>
+      <p>Materials can be uploaded from Google Drive. Links will be added to each subject button for easy access.</p>
+     </div>
+    </div>
+    <div id="semester4Content" class="subjects-container">
+     <div class="subjects-grid" id="semester4Subjects"></div>
+     <div class="upload-note">
+      <h3>📚 Study Materials</h3>
+      <p>Materials can be uploaded from Google Drive. Links will be added to each subject button for easy access.</p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            page_title: "Course Contents",
+            page_subtitle: "Access your study materials and resources",
+            semester_1_label: "Semester 1",
+            semester_2_label: "Semester 2",
+            semester_3_label: "Semester 3",
+            semester_4_label: "Semester 4"
+        };
+
+        const subjectsData = {
+            1: [
+                { name: "Subject 1", code: "S1-101" },
+                { name: "Subject 2", code: "S1-102" },
+                { name: "Subject 3", code: "S1-103" },
+                { name: "Subject 4", code: "S1-104" },
+                { name: "Subject 5", code: "S1-105" },
+                { name: "Subject 6", code: "S1-106" }
+            ],
+            2: [
+                { name: "Subject 1", code: "S2-201" },
+                { name: "Subject 2", code: "S2-202" },
+                { name: "Subject 3", code: "S2-203" },
+                { name: "Subject 4", code: "S2-204" },
+                { name: "Subject 5", code: "S2-205" },
+                { name: "Subject 6", code: "S2-206" }
+            ],
+            3: [
+                { name: "Subject 1", code: "S3-301" },
+                { name: "Subject 2", code: "S3-302" },
+                { name: "Subject 3", code: "S3-303" },
+                { name: "Subject 4", code: "S3-304" },
+                { name: "Subject 5", code: "S3-305" },
+                { name: "Research Project", code: "RP-301", isResearch: true }
+            ],
+            4: [
+                { name: "Subject 1", code: "S4-401" },
+                { name: "Subject 2", code: "S4-402" },
+                { name: "Subject 3", code: "S4-403" },
+                { name: "Subject 4", code: "S4-404" },
+                { name: "Subject 5", code: "S4-405" },
+                { name: "Research Project", code: "RP-401", isResearch: true }
+            ]
+        };
+
+        const subjectIcons = ['💡', '🎯', '⚡', '🌟', '🎨', '🔬', '🧪', '📊', '🎓', '🏆', '💻', '🚀'];
+        let iconIndex = 0;
+
+        function createSubjectCard(subject) {
+            const card = document.createElement('div');
+            card.className = `subject-card${subject.isResearch ? ' research' : ''}`;
+            card.dataset.subjectName = subject.name.toLowerCase();
+            card.dataset.subjectCode = subject.code.toLowerCase();
+            
+            const icon = subject.isResearch ? '🔬' : subjectIcons[iconIndex % subjectIcons.length];
+            if (!subject.isResearch) iconIndex++;
+            
+            card.innerHTML = `
+                <div class="subject-header">
+                    <div class="subject-icon">${icon}</div>
+                    <h3 class="subject-title">${subject.name}</h3>
+                </div>
+                <div class="subject-actions">
+                    <button class="action-btn study-materials-btn" onclick="handleMaterialsClick('${subject.code}', '${subject.name}')">
+                        <span>📁 Study Materials</span>
+                    </button>
+                    <button class="action-btn previous-papers-btn" onclick="handlePapersClick('${subject.code}', '${subject.name}')">
+                        <span>📝 Previous Papers</span>
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function renderSemesterSubjects(semester) {
+            const container = document.getElementById(`semester${semester}Subjects`);
+            container.innerHTML = '';
+            
+            subjectsData[semester].forEach(subject => {
+                container.appendChild(createSubjectCard(subject));
+            });
+        }
+
+        function handleSemesterClick(semester) {
+            document.querySelectorAll('.semester-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.subjects-container').forEach(container => {
+                container.classList.remove('active');
+            });
+            
+            event.target.closest('.semester-btn').classList.add('active');
+            document.getElementById(`semester${semester}Content`).classList.add('active');
+        }
+
+        window.handleMaterialsClick = function(subjectCode, subjectName) {
+            const message = document.createElement('div');
+            message.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); padding: 40px 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 10000; text-align: center; max-width: 450px; border: 2px solid #2c7ed3; animation: modalAppear 0.3s ease;';
+            message.innerHTML = `
+                <h3 style="color: #0a192f; margin: 0 0 15px 0; font-size: 24px;">📁 Study Materials</h3>
+                <p style="color: #4a5568; margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">${subjectName}</p>
+                <p style="color: #718096; margin: 0 0 25px 0; font-size: 14px;">Code: ${subjectCode}</p>
+                <p style="color: #4a5568; margin: 0 0 25px 0;">Materials will be available here. You can link your Google Drive files in the future.</p>
+                <button onclick="this.parentElement.remove()" style="background: linear-gradient(135deg, #2c7ed3 0%, #1e5a9e 100%); color: white; border: none; padding: 12px 35px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(44, 126, 211, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Close</button>
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; animation: fadeIn 0.3s ease;';
+            backdrop.onclick = function() {
+                message.remove();
+                backdrop.remove();
+            };
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(message);
+        };
+
+        window.handlePapersClick = function(subjectCode, subjectName) {
+            const message = document.createElement('div');
+            message.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%); padding: 40px 50px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 10000; text-align: center; max-width: 450px; border: 2px solid #10b981; animation: modalAppear 0.3s ease;';
+            message.innerHTML = `
+                <h3 style="color: #0a192f; margin: 0 0 15px 0; font-size: 24px;">📝 Previous Year Papers</h3>
+                <p style="color: #4a5568; margin: 0 0 10px 0; font-size: 18px; font-weight: 600;">${subjectName}</p>
+                <p style="color: #718096; margin: 0 0 25px 0; font-size: 14px;">Code: ${subjectCode}</p>
+                <p style="color: #4a5568; margin: 0 0 25px 0;">Previous year question papers will be available here. You can add links later.</p>
+                <button onclick="this.parentElement.remove()" style="background: linear-gradient(135deg, #34d399 0%, #10b981 100%); color: white; border: none; padding: 12px 35px; border-radius: 10px; cursor: pointer; font-weight: 600; font-size: 16px; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">Close</button>
+            `;
+            
+            const backdrop = document.createElement('div');
+            backdrop.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 9999; animation: fadeIn 0.3s ease;';
+            backdrop.onclick = function() {
+                message.remove();
+                backdrop.remove();
+            };
+            
+            document.body.appendChild(backdrop);
+            document.body.appendChild(message);
+        };
+
+        document.querySelectorAll('.semester-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const semester = btn.dataset.semester;
+                handleSemesterClick(semester);
+            });
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const activeContainer = document.querySelector('.subjects-container.active');
+            
+            if (activeContainer) {
+                const cards = activeContainer.querySelectorAll('.subject-card');
+                cards.forEach(card => {
+                    const subjectName = card.dataset.subjectName;
+                    const subjectCode = card.dataset.subjectCode;
+                    
+                    if (subjectName.includes(searchTerm) || subjectCode.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'cardAppear 0.3s ease';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        });
+
+        for (let i = 1; i <= 4; i++) {
+            renderSemesterSubjects(i);
+        }
+
+        function createFlyingBirds() {
+            const container = document.getElementById('flyingBirds');
+            const numFlocks = 5;
+
+            for (let f = 0; f < numFlocks; f++) {
+                const flock = document.createElement('div');
+                flock.className = 'bird-flock';
+                
+                const randomY = 10 + Math.random() * 70;
+                const flockDuration = 40 + Math.random() * 30;
+                const flockDelay = Math.random() * 20;
+                
+                flock.style.top = randomY + '%';
+                flock.style.left = '-100px';
+                flock.style.animationDuration = flockDuration + 's';
+                flock.style.animationDelay = flockDelay + 's';
+                
+                const birdsInFlock = 3 + Math.floor(Math.random() * 4);
+                for (let i = 0; i < birdsInFlock; i++) {
+                    const bird = document.createElement('div');
+                    bird.className = 'flying-bird flapping';
+                    bird.innerHTML = `
+                        <svg viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
+                            <g class="wing-left">
+                                <path d="M 20 15 Q 10 10, 5 12 Q 8 15, 20 18 Z" fill="#2c3e50" opacity="0.9"/>
+                            </g>
+                            <g class="wing-right">
+                                <path d="M 20 15 Q 30 10, 35 12 Q 32 15, 20 18 Z" fill="#2c3e50" opacity="0.9"/>
+                            </g>
+                            <ellipse cx="20" cy="17" rx="4" ry="5" fill="#34495e"/>
+                            <circle cx="20" cy="15" r="2.5" fill="#2c3e50"/>
+                        </svg>
+                    `;
+                    
+                    bird.style.position = 'relative';
+                    bird.style.display = 'inline-block';
+                    bird.style.marginLeft = (i * 45) + 'px';
+                    bird.style.marginTop = (Math.sin(i) * 20) + 'px';
+                    
+                    const wingDelay = i * 0.1;
+                    const wingLeft = bird.querySelector('.wing-left');
+                    const wingRight = bird.querySelector('.wing-right');
+                    if (wingLeft) wingLeft.style.animationDelay = wingDelay + 's';
+                    if (wingRight) wingRight.style.animationDelay = wingDelay + 's';
+                    
+                    flock.appendChild(bird);
+                }
+                
+                container.appendChild(flock);
+            }
+
+            const singleBirds = 10;
+            for (let i = 0; i < singleBirds; i++) {
+                const bird = document.createElement('div');
+                bird.className = 'flying-bird flapping';
+                bird.innerHTML = `
+                    <svg viewBox="0 0 40 30" xmlns="http://www.w3.org/2000/svg">
+                        <g class="wing-left">
+                            <path d="M 20 15 Q 10 10, 5 12 Q 8 15, 20 18 Z" fill="#2c3e50" opacity="0.9"/>
+                        </g>
+                        <g class="wing-right">
+                            <path d="M 20 15 Q 30 10, 35 12 Q 32 15, 20 18 Z" fill="#2c3e50" opacity="0.9"/>
+                        </g>
+                        <ellipse cx="20" cy="17" rx="4" ry="5" fill="#34495e"/>
+                        <circle cx="20" cy="15" r="2.5" fill="#2c3e50"/>
+                    </svg>
+                `;
+                
+                const randomX = -10;
+                const randomY = 10 + Math.random() * 80;
+                const randomDelay = Math.random() * 10;
+                
+                bird.style.left = randomX + '%';
+                bird.style.top = randomY + '%';
+                
+                const wingLeft = bird.querySelector('.wing-left');
+                const wingRight = bird.querySelector('.wing-right');
+                if (wingLeft) wingLeft.style.animationDelay = randomDelay + 's';
+                if (wingRight) wingRight.style.animationDelay = randomDelay + 's';
+                
+                const duration = 25 + Math.random() * 20;
+                let startTime = null;
+                
+                function animateBird(timestamp) {
+                    if (!startTime) startTime = timestamp - (randomDelay * 1000);
+                    const elapsed = timestamp - startTime;
+                    const progress = (elapsed / (duration * 1000)) % 1;
+                    
+                    const xPos = progress * 110 - 10;
+                    const yPos = randomY - (progress * 25);
+                    const yVariation = Math.sin(progress * Math.PI * 4) * 3;
+                    
+                    bird.style.left = xPos + '%';
+                    bird.style.top = (yPos + yVariation) + '%';
+                    
+                    if (xPos < 105) {
+                        requestAnimationFrame(animateBird);
+                    } else {
+                        bird.style.left = '-10%';
+                        bird.style.top = randomY + '%';
+                        startTime = timestamp;
+                        requestAnimationFrame(animateBird);
+                    }
+                }
+                
+                requestAnimationFrame(animateBird);
+                container.appendChild(bird);
+            }
+        }
+
+        createFlyingBirds();
+
+        function createSunRays() {
+            const sunRays = document.getElementById('sunRays');
+            const numRays = 16;
+            
+            for (let i = 0; i < numRays; i++) {
+                const ray = document.createElement('div');
+                ray.className = 'sun-ray';
+                ray.style.transform = `rotate(${(360 / numRays) * i}deg)`;
+                sunRays.appendChild(ray);
+            }
+        }
+
+        createSunRays();
+
+        document.addEventListener('keydown', (e) => {
+            const activeBtn = document.querySelector('.semester-btn.active');
+            let currentSemester = activeBtn ? parseInt(activeBtn.dataset.semester) : 0;
+            
+            if (e.key === 'ArrowRight' && currentSemester < 4) {
+                const nextBtn = document.querySelector(`.semester-btn[data-semester="${currentSemester + 1}"]`);
+                if (nextBtn) nextBtn.click();
+            } else if (e.key === 'ArrowLeft' && currentSemester > 1) {
+                const prevBtn = document.querySelector(`.semester-btn[data-semester="${currentSemester - 1}"]`);
+                if (prevBtn) prevBtn.click();
+            }
+        });
+
+        async function onConfigChange(config) {
+            document.getElementById('pageTitle').textContent = config.page_title || defaultConfig.page_title;
+            document.getElementById('pageSubtitle').textContent = config.page_subtitle || defaultConfig.page_subtitle;
+            document.getElementById('semester1Label').textContent = config.semester_1_label || defaultConfig.semester_1_label;
+            document.getElementById('semester2Label').textContent = config.semester_2_label || defaultConfig.semester_2_label;
+            document.getElementById('semester3Label').textContent = config.semester_3_label || defaultConfig.semester_3_label;
+            document.getElementById('semester4Label').textContent = config.semester_4_label || defaultConfig.semester_4_label;
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["page_title", config.page_title || defaultConfig.page_title],
+                    ["page_subtitle", config.page_subtitle || defaultConfig.page_subtitle],
+                    ["semester_1_label", config.semester_1_label || defaultConfig.semester_1_label],
+                    ["semester_2_label", config.semester_2_label || defaultConfig.semester_2_label],
+                    ["semester_3_label", config.semester_3_label || defaultConfig.semester_3_label],
+                    ["semester_4_label", config.semester_4_label || defaultConfig.semester_4_label]
+                ])
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a39db10e0f86ee0',t:'MTc2Mzk5NzI2My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
