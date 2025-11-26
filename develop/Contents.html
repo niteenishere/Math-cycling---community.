@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Contents - School of Mathematical Sciences</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active-link::after {
+            width: 100%;
+        }
+        .subject-card {
+            transition: all 0.3s ease;
+        }
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        /* Modal Animation */
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-content {
+            animation: modalFadeIn 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold">School of Mathematical Sciences</h1>
+                            <p class="text-sm text-blue-200">North Maharashtra University</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center">
+                        <a href="index.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Home</a>
+                        <a href="about.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">About</a>
+                        <a href="programs.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Programs</a>
+                        <a href="contents.html" class="nav-link active-link px-4 py-2 hover:text-blue-300 transition">Contents</a>
+                        <a href="faculty.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Faculty</a>
+                        <a href="contact.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-32 pb-20 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Course Contents</h1>
+                <p class="text-xl text-blue-200 mb-8">Access study materials, lecture notes, and previous year question papers.</p>
+                
+                <!-- Search Bar -->
+                <div class="max-w-xl mx-auto relative">
+                    <input type="text" id="subjectSearchInput" placeholder="🔍 Search subjects, codes, or materials..." 
+                           class="w-full py-4 px-6 rounded-full text-gray-800 focus:outline-none focus:ring-4 focus:ring-blue-500 shadow-xl transition-all">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Semester Navigation -->
+    <section class="py-8 bg-white border-b border-gray-200 sticky top-[88px] z-40 shadow-sm" style="top: 100px;"> <!-- Adjusted top for sticky nav -->
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="switchSemester(1)" class="semester-tab active px-8 py-3 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition shadow-md" data-semester="1">Semester 1</button>
+                <button onclick="switchSemester(2)" class="semester-tab px-8 py-3 rounded-full bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 transition" data-semester="2">Semester 2</button>
+                <button onclick="switchSemester(3)" class="semester-tab px-8 py-3 rounded-full bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 transition" data-semester="3">Semester 3</button>
+                <button onclick="switchSemester(4)" class="semester-tab px-8 py-3 rounded-full bg-gray-100 text-gray-600 font-semibold hover:bg-gray-200 transition" data-semester="4">Semester 4</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Grid -->
+    <section class="py-16 min-h-screen">
+        <div class="container mx-auto px-4">
+            <div id="semester-subjects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Content injected by JS -->
+            </div>
+            
+            <!-- Empty State / Upload Note -->
+            <div class="mt-12 bg-white rounded-xl p-8 shadow-lg text-center border-l-4 border-blue-500 max-w-3xl mx-auto">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">📚 Resource Repository</h3>
+                <p class="text-gray-600">Materials are securely hosted on the University Google Drive. Click "Materials" or "Papers" on any subject card to access the respective folders.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">School of Mathematical Sciences</h3>
+                    <p class="text-gray-400">North Maharashtra University<br>Jalgaon, Maharashtra<br>India - 425001</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <span class="mr-2">📞</span> +91 257 2258428
+                    </p>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <span class="mr-2">✉️</span> mathematics@nmu.ac.in
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <a href="index.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Home</a>
+                        <a href="about.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">About</a>
+                        <a href="programs.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Programs</a>
+                        <a href="contents.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contents</a>
+                        <a href="faculty.html" class="nav-link active-link px-4 py-2 hover:text-blue-300 transition">Faculty</a>                       
+                        <a href="Contacts.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contact</a>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 School of Mathematical Sciences, North Maharashtra University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="materialModal" class="fixed inset-0 z-[60] hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeModal()"></div>
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full modal-content">
+                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="sm:flex sm:items-start">
+                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 sm:mx-0 sm:h-10 sm:w-10">
+                            <svg class="h-6 w-6 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Study Materials</h3>
+                            <div class="mt-2">
+                                <p class="text-sm text-gray-500" id="modal-description">
+                                    Accessing resources for Subject.
+                                </p>
+                                <p class="text-sm text-gray-500 mt-2">
+                                    Redirecting to secure university storage...
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                    <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm" onclick="closeModal()">
+                        Go to Drive
+                    </button>
+                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm" onclick="closeModal()">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sticky Navbar Logic
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-opacity-95', 'backdrop-blur-sm');
+            } else {
+                navbar.classList.remove('bg-opacity-95', 'backdrop-blur-sm');
+            }
+        });
+
+        // Data with Images based on uploaded Syllabus PDFs
+        const subjectsData = {
+            1: [
+                { name: "Distribution Theory", code: "ST-411", image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&w=500&q=60" },
+                { name: "Sampling Theory & Statistics for National Development", code: "ST-412", image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=500&q=60" },
+                { name: "Mathematical Methods", code: "ST-413", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500&q=60" },
+                { name: "Advanced R Programming and Numerical Methods", code: "ST-414(A)", image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?auto=format&fit=crop&w=500&q=60" },
+                { name: "Practicals-I", code: "ST-415", image: "https://images.unsplash.com/photo-1581092921461-eab62e97a782?auto=format&fit=crop&w=500&q=60" },
+                { name: "Research Methodology", code: "ST-416", image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500&q=60" }
+            ],
+            2: [
+                { name: "Probability Theory", code: "ST-421", image: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=500&q=60" },
+                { name: "Parametric Inference", code: "ST-422", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=60" },
+                { name: "Statistical Computing with Python", code: "ST-423", image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=500&q=60" },
+                { name: "Linear Models and Regression Analysis", code: "ST-424(A)", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=60" },
+                { name: "Practicals-II", code: "ST-425", image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=500&q=60" },
+                { name: "On Job Training/ Field Project", code: "ST-426", image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=500&q=60" }
+            ],
+            3: [
+                { name: "Design, Planning and Analysis of Experiments", code: "ST-511", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=500&q=60" },
+                { name: "Multivariate Analysis", code: "ST-512", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=60" },
+                { name: "Analysis of Clinical Trials using SAS", code: "ST-513", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=500&q=60" },
+                { name: "Data Mining", code: "ST-514(B)", image: "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=500&q=60" },
+                { name: "Practicals III", code: "ST-515", image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=500&q=60" },
+                { name: "Research Project I", code: "ST-516", image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=500&q=60" }
+            ],
+            4: [
+                { name: "Stochastic Processes", code: "ST-521", image: "https://images.unsplash.com/photo-1494059980473-813e73ee784b?auto=format&fit=crop&w=500&q=60" },
+                { name: "Time Series Analysis", code: "ST-522", image: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?auto=format&fit=crop&w=500&q=60" },
+                { name: "Actuarial Statistics", code: "ST-523(A)", image: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?auto=format&fit=crop&w=500&q=60" },
+                { name: "Technical Communications and Practicals-IV", code: "ST-524", image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=500&q=60" },
+                { name: "Research Project Phase II", code: "ST-525", image: "https://images.unsplash.com/photo-1627556704290-2b1f5853ff78?auto=format&fit=crop&w=500&q=60" }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderSemester(1);
+            document.getElementById('subjectSearchInput').addEventListener('input', handleSearch);
+        });
+
+        function switchSemester(sem) {
+            // Tab UI
+            document.querySelectorAll('.semester-tab').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-600');
+                if (parseInt(btn.getAttribute('data-semester')) === sem) {
+                    btn.classList.remove('bg-gray-100', 'text-gray-600');
+                    btn.classList.add('active', 'bg-blue-600', 'text-white');
+                }
+            });
+            renderSemester(sem);
+        }
+
+        function renderSemester(sem) {
+            const container = document.getElementById('semester-subjects-container');
+            container.innerHTML = '';
+            const subjects = subjectsData[sem];
+            
+            subjects.forEach(subject => {
+                const card = document.createElement('div');
+                card.className = 'subject-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 flex flex-col h-full';
+                
+                // Image Header using standard <img> tag
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'h-48 w-full overflow-hidden relative bg-gray-200';
+                imgContainer.innerHTML = `
+                    <img src="${subject.image}" alt="${subject.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" loading="lazy">
+                    <div class="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-md">${subject.code}</div>
+                `;
+                
+                const content = document.createElement('div');
+                content.className = 'p-6 flex flex-col flex-grow';
+                content.innerHTML = `
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 line-clamp-2">${subject.name}</h3>
+                    <p class="text-gray-600 mb-4 text-sm flex-grow">Access lecture notes, assignments, and previous papers.</p>
+                    <div class="flex gap-2 mt-auto">
+                        <button onclick="openModal('${subject.name}', 'Materials')" class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-2 px-3 rounded transition">
+                            Materials
+                        </button>
+                        <button onclick="openModal('${subject.name}', 'Papers')" class="flex-1 text-center bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-3 rounded transition">
+                            Papers
+                        </button>
+                    </div>
+                `;
+                
+                card.appendChild(imgContainer);
+                card.appendChild(content);
+                container.appendChild(card);
+            });
+        }
+
+        function handleSearch(e) {
+            const term = e.target.value.toLowerCase();
+            const container = document.getElementById('semester-subjects-container');
+            const cards = container.getElementsByClassName('subject-card');
+            
+            Array.from(cards).forEach(card => {
+                const text = card.innerText.toLowerCase();
+                card.style.display = text.includes(term) ? 'flex' : 'none';
+            });
+        }
+
+        function openModal(subjectName, type) {
+            const modal = document.getElementById('materialModal');
+            document.getElementById('modal-title').textContent = `${type}: ${subjectName}`;
+            document.getElementById('modal-description').innerHTML = `You are accessing the <b>${type.toLowerCase()}</b> for <b>${subjectName}</b>.`;
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('materialModal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

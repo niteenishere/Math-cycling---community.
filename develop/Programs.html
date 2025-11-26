@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Programs - School of Mathematical Sciences | North Maharashtra University</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1596495577886-d920f1fb7238?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #fff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active-link::after {
+            width: 100%;
+        }
+        .program-card {
+            transition: all 0.3s ease;
+        }
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Modal Styles */
+        .modal {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="bg-gradient-to-r from-blue-800 to-indigo-900 text-white shadow-lg">
+            <div class="container mx-auto px-4 py-4">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center mb-4 md:mb-0">
+                        <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl md:text-2xl font-bold">School of Mathematical Sciences</h1>
+                            <p class="text-sm text-blue-200">North Maharashtra University</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center">
+                        <a href="index.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Home</a>
+                        <a href="about.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">About</a>
+                        <a href="programs.html" class="nav-link active-link px-4 py-2 hover:text-blue-300 transition">Programs</a>
+                        <a href="contents.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contents</a>
+                        <a href="faculty.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Faculty</a>
+                        <a href="contact.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-32 pb-20 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6">Academic Programs</h1>
+            <p class="text-xl text-blue-200 mb-8">Discover our specialized programs in Mathematical Sciences and Statistics</p>
+        </div>
+    </section>
+
+    <!-- Tabs & Content -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="tab-button px-6 py-3 rounded-full bg-blue-600 text-white font-medium" data-tab="all">All Programs</button>
+                <button class="tab-button px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium" data-tab="undergraduate">Undergraduate</button>
+                <button class="tab-button px-6 py-3 rounded-full bg-gray-200 text-gray-700 font-medium" data-tab="postgraduate">Postgraduate</button>
+            </div>
+            
+            <div id="all" class="tab-content active">
+                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- M.Sc. Statistics -->
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col">
+                        <div class="h-48 bg-gradient-to-r from-blue-600 to-indigo-700 flex items-center justify-center relative overflow-hidden">
+                             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Statistics" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+                            <div class="relative z-10 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                <h3 class="text-xl font-bold text-white">M.Sc. Statistics</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Specialization in Industrial Statistics</h4>
+                            <p class="text-gray-600 mb-4 flex-grow">This master's program focuses on applying statistical methods to industrial processes, quality control, and reliability engineering. Gain expertise in data analysis for industry.</p>
+                            
+                            <div class="mt-auto space-y-2 text-sm text-gray-600 mb-6">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>2 Years (4 Semesters)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                    <span>40 Seats</span>
+                                </div>
+                            </div>
+                            <button onclick="openProgramModal('msc-stats')" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition cursor-pointer">Program Details</button>
+                        </div>
+                    </div>
+
+                    <!-- B.Sc. Actuarial Statistics -->
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col">
+                        <div class="h-48 bg-gradient-to-r from-green-600 to-teal-600 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224155-98406858d0be?auto=format&fit=crop&w=800&q=80" alt="Actuarial Statistics" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+                            <div class="relative z-10 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                                </svg>
+                                <h3 class="text-xl font-bold text-white">B.Sc. Actuarial Statistics</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Undergraduate Program</h4>
+                            <p class="text-gray-600 mb-4 flex-grow">Designed for students aspiring to become actuaries. The curriculum covers probability, financial mathematics, and risk management, aligning with actuarial exams.</p>
+                            
+                            <div class="mt-auto space-y-2 text-sm text-gray-600 mb-6">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>3 Years (6 Semesters)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                    <span>40 Seats</span>
+                                </div>
+                            </div>
+                            <button onclick="openProgramModal('bsc-actuarial')" class="block w-full text-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition cursor-pointer">Program Details</button>
+                        </div>
+                    </div>
+
+                    <!-- B.Sc. (Honors) Mathematical Science -->
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col">
+                        <div class="h-48 bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80" alt="Mathematical Science" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+                            <div class="relative z-10 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                <h3 class="text-xl font-bold text-white">B.Sc. (Honors)</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Mathematical Science</h4>
+                            <p class="text-gray-600 mb-4 flex-grow">An interdisciplinary program integrating Mathematics, Statistics, and Computer Science. Ideal for students seeking a strong analytical and computational foundation.</p>
+                            
+                            <div class="mt-auto space-y-2 text-sm text-gray-600 mb-6">
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>4 Years (8 Semesters)</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                    <span>60 Seats</span>
+                                </div>
+                            </div>
+                            <button onclick="openProgramModal('bsc-honors')" class="block w-full text-center bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition cursor-pointer">Program Details</button>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+            <!-- Undergraduate Tab Content -->
+            <div id="undergraduate" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- B.Sc. Actuarial Statistics (Duplicate for tab) -->
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col">
+                        <!-- Content same as above -->
+                        <div class="h-48 bg-gradient-to-r from-green-600 to-teal-600 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1554224155-98406858d0be?auto=format&fit=crop&w=800&q=80" alt="Actuarial Statistics" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+                            <div class="relative z-10 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                                </svg>
+                                <h3 class="text-xl font-bold text-white">B.Sc. Actuarial Statistics</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Undergraduate Program</h4>
+                            <p class="text-gray-600 mb-4 flex-grow">Designed for students aspiring to become actuaries. The curriculum covers probability, financial mathematics, and risk management, aligning with actuarial exams.</p>
+                            <div class="mt-auto space-y-2 text-sm text-gray-600 mb-6">
+                                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>3 Years (6 Semesters)</span></div>
+                                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg><span>40 Seats</span></div>
+                            </div>
+                            <a href="#" onclick="openProgramModal('bsc-actuarial')" class="block text-center bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg transition">Program Details</a>
+                        </div>
+                    </div>
+
+                    <!-- B.Sc. (Honors) Mathematical Science (Duplicate for tab) -->
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col">
+                        <!-- Content same as above -->
+                        <div class="h-48 bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80" alt="Mathematical Science" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+                            <div class="relative z-10 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                </svg>
+                                <h3 class="text-xl font-bold text-white">B.Sc. (Honors)</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Mathematical Science</h4>
+                            <p class="text-gray-600 mb-4 flex-grow">An interdisciplinary program integrating Mathematics, Statistics, and Computer Science. Ideal for students seeking a strong analytical and computational foundation.</p>
+                            <div class="mt-auto space-y-2 text-sm text-gray-600 mb-6">
+                                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>4 Years (8 Semesters)</span></div>
+                                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg><span>60 Seats</span></div>
+                            </div>
+                            <a href="#" onclick="openProgramModal('bsc-honors')" class="block text-center bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition">Program Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Postgraduate Tab Content -->
+            <div id="postgraduate" class="tab-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+                    <!-- M.Sc. Statistics (Duplicate for tab) -->
+                    <div class="program-card bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-full flex flex-col max-w-md mx-auto">
+                        <!-- Content same as above -->
+                        <div class="h-48 bg-gradient-to-r from-blue-600 to-indigo-700 flex items-center justify-center relative overflow-hidden">
+                             <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Statistics" class="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay">
+                            <div class="relative z-10 text-center p-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-white mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                <h3 class="text-xl font-bold text-white">M.Sc. Statistics</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Specialization in Industrial Statistics</h4>
+                            <p class="text-gray-600 mb-4 flex-grow">This master's program focuses on applying statistical methods to industrial processes, quality control, and reliability engineering. Gain expertise in data analysis for industry.</p>
+                            <div class="mt-auto space-y-2 text-sm text-gray-600 mb-6">
+                                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span>2 Years (4 Semesters)</span></div>
+                                <div class="flex items-center"><svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg><span>40 Seats</span></div>
+                            </div>
+                            <button onclick="openProgramModal('msc-stats')" class="block w-full text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition cursor-pointer">Program Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Opportunities -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Career Opportunities</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Our programs prepare students for diverse career paths across various sectors.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Career Field 1 -->
+                <div class="bg-blue-50 rounded-xl p-6">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4 math-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Academia & Research</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            University Professor
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Research Scientist
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Educational Consultant
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Career Field 2 -->
+                <div class="bg-purple-50 rounded-xl p-6">
+                    <div class="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4 math-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Finance & Banking</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Quantitative Analyst
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Risk Analyst
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Financial Modeler
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Career Field 3 -->
+                <div class="bg-green-50 rounded-xl p-6">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4 math-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Data Science & Analytics</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Data Scientist
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Statistical Analyst
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Machine Learning Engineer
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Career Field 4 -->
+                <div class="bg-yellow-50 rounded-xl p-6">
+                    <div class="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center mx-auto mb-4 math-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Technology & Computing</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Algorithm Developer
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Cryptographer
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Software Engineer
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Career Field 5 -->
+                <div class="bg-red-50 rounded-xl p-6">
+                    <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto mb-4 math-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Government & Public Sector</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Statistical Officer
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Policy Analyst
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Defense Analyst
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Career Field 6 -->
+                <div class="bg-indigo-50 rounded-xl p-6">
+                    <div class="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mx-auto mb-4 math-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2 text-center">Industry & Engineering</h3>
+                    <ul class="space-y-2 text-gray-600">
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Operations Research Analyst
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Quality Control Analyst
+                        </li>
+                        <li class="flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                            </svg>
+                            Computational Modeler
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Begin Your Mathematical Journey?</h2>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Join our vibrant academic community at the School of Mathematical Sciences and unlock a world of opportunities.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="admission.html" class="bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Apply Now</a>
+                <a href="Contacts.html" class="bg-transparent hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-full border-2 border-white transition duration-300 transform hover:scale-105">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">School of Mathematical Sciences</h3>
+                    <p class="text-gray-400">North Maharashtra University<br>Jalgaon, Maharashtra<br>India - 425001</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <span class="mr-2">📞</span> +91 257 2258428
+                    </p>
+                    <p class="flex items-center text-gray-400 mb-2">
+                        <span class="mr-2">✉️</span> mathematics@nmu.ac.in
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <a href="index.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Home</a>
+                        <a href="about.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">About</a>
+                        <a href="programs.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Programs</a>
+                        <a href="contents.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contents</a>
+                        <a href="faculty.html" class="nav-link active-link px-4 py-2 hover:text-blue-300 transition">Faculty</a>
+                        <a href="Contacts.html" class="nav-link px-4 py-2 hover:text-blue-300 transition">Contact</a>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2025 School of Mathematical Sciences, North Maharashtra University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Detailed Program Modal -->
+    <div id="programModal" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black bg-opacity-50">
+        <div class="modal-content bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div class="relative bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-6">
+                <h2 id="modalTitle" class="text-2xl font-bold">Program Details</h2>
+                <p id="modalSubtitle" class="text-blue-100 mt-1">Course Curriculum & Structure</p>
+                <button onclick="closeProgramModal()" class="absolute top-6 right-6 text-white hover:text-blue-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="modalBody" class="p-6">
+                <!-- Content will be injected here -->
+            </div>
+            
+            <div class="bg-gray-50 p-4 border-t border-gray-200 flex justify-end">
+                <button onclick="closeProgramModal()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium rounded-lg transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Helper function to show/hide content based on tab
+        function activateTab(tabId) {
+            // Deactivate all tabs
+            tabButtons.forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none'; // Ensure hidden
+            });
+
+            // Activate selected tab button
+            const activeButton = document.querySelector(`.tab-button[data-tab="${tabId}"]`);
+            if(activeButton) {
+                activeButton.classList.remove('bg-gray-200', 'text-gray-700');
+                activeButton.classList.add('bg-blue-600', 'text-white');
+            }
+
+            // Show content
+            const activeContent = document.getElementById(tabId);
+            if(activeContent) {
+                activeContent.classList.add('active');
+                activeContent.style.display = 'block';
+            }
+        }
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                activateTab(tabId);
+            });
+        });
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-opacity-95', 'backdrop-blur-sm');
+            } else {
+                navbar.classList.remove('bg-opacity-95', 'backdrop-blur-sm');
+            }
+        });
+        
+        // Initialize with 'all' tab active
+        activateTab('all');
+
+        // Modal Logic
+        function openProgramModal(programId) {
+            const modal = document.getElementById('programModal');
+            const title = document.getElementById('modalTitle');
+            const subtitle = document.getElementById('modalSubtitle');
+            const body = document.getElementById('modalBody');
+
+            if(programId === 'msc-stats') {
+                title.textContent = 'M.Sc. Statistics';
+                subtitle.textContent = 'Specialization in Industrial Statistics | 2 Years | 4 Semesters';
+                body.innerHTML = `
+                    <div class="space-y-6">
+                        <!-- Objectives & Career -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                                <h3 class="text-lg font-semibold text-blue-900 mb-3">Program Objectives</h3>
+                                <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                                    <li>Students are expected to learn mathematical methods for Statistics, Mathematical Statistics, core Statistical Methods as per syllabi provided by UGC or suggested by NET/SET.</li>
+                                    <li>Students are expected to learn in depth the computational Statistical tools through computer programming and Statistical software.</li>
+                                    <li>More focus is given on Statistical tools useful for service as well as manufacturing industries.</li>
+                                    <li>Technical communications and other audit courses will develop overall personality of student.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                                <h3 class="text-lg font-semibold text-blue-900 mb-3">Future Career Prospects</h3>
+                                <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                                    After completion of this M.Sc.(Statistics) degree program candidates will be ready to serve in:
+                                </p>
+                                <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                                    <li>Industry (Banking, Finance, Insurance, Production, Software, etc)</li>
+                                    <li>Government organizations</li>
+                                    <li>Teaching and research</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Key Details Table -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50 w-1/3">Eligibility (General)</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">
+                                            A candidate is considered to be eligible for admission to the post graduate course if he/she has secured at least 50% (or equivalent CGPA) marks at graduation (45% marks for backward class i.e. SC/ST/DT/NT/OBC/SBC category candidates from Maharashtra state).
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50 w-1/3">Eligibility (Specific)</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">
+                                            B.Sc.(Statistics) or B.Sc. in any subject with Statistics as a one of the subsidiary subject up to second year B.Sc. Minimum 50% (45% for SC/ST/DT/OBC candidates) marks in Statistics are essential at B.Sc. Level.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Admission Procedure</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">Online Centralized Admission Procedure (CAP) for admission to this course is carried out by the university in the month of June.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Medium of Instructions</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">English</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Annual Intake</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">30* (* In addition to regular intake mentioned in the above table, 05 (five) seats are available for industry sponsored candidates.)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Mode</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">Regular</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100 text-sm text-yellow-800">
+                            <strong>Note:</strong> Course Structure and Fees details are updated periodically. Please contact the department for the latest fee structure for First and Second Year.
+                        </div>
+                    </div>
+                `;
+            } else if(programId === 'bsc-actuarial') {
+                title.textContent = 'B.Sc. Actuarial Statistics';
+                subtitle.textContent = 'Undergraduate Program | 3 Years | 6 Semesters';
+                body.innerHTML = `
+                    <div class="space-y-6">
+                        <!-- Objectives & Career -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-green-50 p-5 rounded-lg border border-green-100">
+                                <h3 class="text-lg font-semibold text-green-900 mb-3">Program Objectives</h3>
+                                <p class="text-sm text-gray-700 leading-relaxed">
+                                    With highly rising demand of actuarial professionals coupled with slow increase in supply resulting into acute shortage of actuaries in India. Main objective to start this course is to facilitate good potential candidates to become actuaries and to prepare students to write examinations of Institute of Actuaries.
+                                </p>
+                            </div>
+                            <div class="bg-green-50 p-5 rounded-lg border border-green-100">
+                                <h3 class="text-lg font-semibold text-green-900 mb-3">Future Career Prospects</h3>
+                                <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                                    <li>Insurance Pension plans and Fund Management</li>
+                                    <li>Banking and finance Management consulting</li>
+                                    <li>Government agencies (Social Security, Pension Benefit Guarantee, etc.)</li>
+                                    <li>Brokerage houses and software development companies</li>
+                                </ul>
+                                <p class="text-xs text-gray-500 mt-2">For more info, visit <a href="http://www.actuariesindia.org" target="_blank" class="text-blue-600 underline">Institute of Actuaries of India (IAI)</a></p>
+                            </div>
+                        </div>
+
+                        <!-- Key Details Table -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50 w-1/3">Eligibility</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">
+                                            A candidate who has passed HSC(10+2) from any stream (Science/Commerce/Arts) with one of the subject Mathematics in English medium and has obtained at least 50% marks in Mathematics is eligible to get admission through entrance examination.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Admission Procedure</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">Admission to this course to carried out this by school in the month of June.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Medium of Instructions</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">English</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Annual Intake</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Mode</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">Regular</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100 text-sm text-yellow-800">
+                            <strong>Note:</strong> Course Structure and Fees details are updated periodically. Please contact the department for the latest fee structure for First, Second, and Third Year.
+                        </div>
+                    </div>
+                `;
+            } else if(programId === 'bsc-honors') {
+                title.textContent = 'B.Sc. (Honors) Mathematical Science';
+                subtitle.textContent = 'Major in Actuarial Science/Statistics | Minor in Data Science/Economics | 4 Years';
+                body.innerHTML = `
+                    <div class="space-y-6">
+                        <!-- Highlights & Objectives -->
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-purple-50 p-5 rounded-lg border border-purple-100">
+                                <h3 class="text-lg font-semibold text-purple-900 mb-3">Program Highlights</h3>
+                                <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                                    <li>Comprehensive curriculum blending Statistics, Mathematics, and Data Science.</li>
+                                    <li>Hands-on experience with R, Python, and SQL.</li>
+                                    <li>Specialized courses in Financial Mathematics, Data Visualization, and Econometrics.</li>
+                                    <li>Expert faculty and industry mentorship.</li>
+                                </ul>
+                            </div>
+                            <div class="bg-purple-50 p-5 rounded-lg border border-purple-100">
+                                <h3 class="text-lg font-semibold text-purple-900 mb-3">Program Objectives</h3>
+                                <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                                    <li>Develop critical thinking and analytical skills.</li>
+                                    <li>Enhance job prospects in data analysis, actuarial science, and financial modeling.</li>
+                                    <li>Provide flexible exit options with certificates and diplomas at various stages.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Key Details Table -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50 w-1/3">Nature & Duration</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">
+                                            Full-time course of four years (8 semesters) duration after HSC (12th Standard). Students can choose a Major and a Minor subject.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Eligibility</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">
+                                            HSC (Science) or B.Sc. (any subject with Statistics as a subsidiary subject) with min 50% marks (45% for reserved categories).
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Admission Procedure</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">Online Centralized Admission Procedure (CAP) by the University in June.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Medium of Instructions</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">English</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 bg-gray-50">Annual Intake</td>
+                                        <td class="px-6 py-4 text-sm text-gray-700">60 Seats (Reservation rules apply)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <!-- Exit Options -->
+                        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-5">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Exit Options</h3>
+                            <ul class="space-y-2 text-sm text-gray-700 list-disc list-inside">
+                                <li><strong>After 1 Year:</strong> UG Certificate in Mathematical Sciences</li>
+                                <li><strong>After 2 Years:</strong> UG Diploma in Mathematical Sciences</li>
+                                <li><strong>After 3 Years:</strong> B.Sc. in Mathematical Sciences</li>
+                                <li><strong>After 4 Years:</strong> B.Sc. (Honors) with Research in Mathematical Sciences</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-100 text-sm text-yellow-800">
+                            <strong>Note:</strong> Course Structure and Fees details are updated periodically. Please contact the department for the latest fee structure.
+                        </div>
+                    </div>
+                `;
+            }
+            modal.classList.add('active');
+        }
+
+        function closeProgramModal() {
+            document.getElementById('programModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
